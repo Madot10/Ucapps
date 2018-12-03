@@ -123,3 +123,14 @@ function finMosaico(){
         document.getElementById("menu").innerHTML += '<div class="alert alert-success" role="alert">No tienes ninguna app agregada! <br> Dirigite a la seccion "Catalogo" y con un simple click agrega! </div>';
     } 
 }
+
+if (navigator.serviceWorker.controller) {
+    console.log('[PWA Builder] active service worker found, no need to register')
+  } else {
+    //Register the ServiceWorker
+    navigator.serviceWorker.register('ucapps-sw.js', {
+      scope: './'
+    }).then(function(reg) {
+      console.log('Service worker has been registered for scope:'+ reg.scope);
+    });
+  }
