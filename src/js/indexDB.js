@@ -76,7 +76,7 @@ function getAllLocalApps(){
 
 function deleteApp(nam){
     //console.log("Intento de borrar ", nam);
-    let todel = db.transaction("appLocal", "readwrite")
+    let todel = dbI.transaction("appLocal", "readwrite")
     .objectStore("appLocal")
     .delete(nam)
     .onsuccess = function (event) {
