@@ -23,7 +23,7 @@ function changeScreen(nameScr){
         getAllApps();
     }else if(nameScr == "menu"){
         document.getElementById("menu").innerHTML = ""; 
-        toggleLoader();
+        //toggleLoader();
         getAllLocalApps();
     }
     
@@ -31,6 +31,7 @@ function changeScreen(nameScr){
     screens[nameScr].style.display = "block";  
 }
 
+//Lista de apps catalogo
 function genHTMLlist(name, icon, url, description, id){
     let mainA = document.createElement('a');
     mainA.setAttribute("onclick", ` popApp('${url}', ${id})`)
@@ -84,26 +85,42 @@ function popApp(url, id){
     $('#appModal').modal("show");
 }
 
+//LIsta de apps instaladas
 function genHTMLApps(name,icon, url){
-    let aMain = document.createElement("a");
-    aMain.href = url;
+    
 
-        let divMain = document.createElement('div');
-        divMain.classList.add("card", "text-center", "m-1");
-        divMain.style.width = "11rem";
+    let divMain = document.createElement('div');
+    divMain.classList.add("card", "text-center", "m-2");
+    divMain.style.width = "11rem";
+
+        //imagen link
+        let aMain = document.createElement("a");
+        aMain.href = url;
 
         //icon
         let ic = document.createElement("img");
         ic.classList.add("card-img-top");
         ic.src = icon;
 
-        divMain.appendChild(ic);
+        aMain.appendChild(ic);
+        divMain.appendChild(aMain);
 
         //body
         let cBody = document.createElement("div");
         cBody.classList.add("card-body");
 
-            let title = document.createElement("h5");
+            let clbtn = document.createElement("button");
+            clbtn.classList.add("close");
+            clbtn.setAttribute("onclick",`deleteApp('${name}')`);
+
+            let sp = document.createElement("span");
+            sp.setAttribute("aria-hidden", "true");
+            sp.innerHTML = "&times;";
+
+            clbtn.appendChild(sp);
+            cBody.appendChild(clbtn);
+
+            let title = document.createElement("h6");
             title.classList.add("card-title");
             title.innerText = name;
         
@@ -111,9 +128,9 @@ function genHTMLApps(name,icon, url){
 
     divMain.appendChild(cBody);
 
-    aMain.appendChild(divMain);
+    //aMain.appendChild(divMain);
 
-    document.getElementById("menu").appendChild(aMain);
+    document.getElementById("menu").appendChild(divMain);
 
 }
 

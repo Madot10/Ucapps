@@ -21,5 +21,7 @@ function getAllApps(){
                 console.log(doc.id, " => ", doc.data());
             });
             toggleLoader();
+    }).catch(function(error){
+        console.log("ERROR", error);
     });
 }

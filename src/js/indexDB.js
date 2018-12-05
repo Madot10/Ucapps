@@ -68,8 +68,19 @@ function getAllLocalApps(){
             }else{
                 console.log("No mas/ninguna entradas");
                 finMosaico();
-                toggleLoader();
+                //toggleLoader();
             }
         }
 
+}
+
+function deleteApp(nam){
+    //console.log("Intento de borrar ", nam);
+    let todel = dbI.transaction("appLocal", "readwrite")
+    .objectStore("appLocal")
+    .delete(nam)
+    .onsuccess = function (event) {
+        console.log("App eliminado", nam);
+    }
+    changeScreen("menu");
 }
