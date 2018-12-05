@@ -24,7 +24,7 @@ req.onupgradeneeded = function (event) {
     objectStore = dbI.createObjectStore("appLocal", { keyPath: "name" });
 
     objectStore.transaction.oncomplete = function (event) {
-        console.log('create');
+        //console.log('create');
     }
 
 }
@@ -32,7 +32,7 @@ req.onupgradeneeded = function (event) {
 req.onsuccess = function (event) {
     //OK OPEN DB
     dbI = event.target.result;
-    console.log('abierto');
+    //console.log('abierto');
     changeScreen('menu');
 }
 
@@ -42,7 +42,7 @@ function addApp() {
         .add(apps[idApp]);
 
     req.onsuccess = function (event) {
-        console.log("ADD exitosamente!");
+        //console.log("ADD exitosamente!");
         $('#appModal').modal('hide');
     }
 
@@ -66,7 +66,7 @@ function getAllLocalApps(){
                 genHTMLApps(cursor.value.name, cursor.value.icon, cursor.value.url);
                 cursor.continue();
             }else{
-                console.log("No mas/ninguna entradas");
+                //console.log("No mas/ninguna entradas");
                 finMosaico();
                 //toggleLoader();
             }
@@ -76,11 +76,11 @@ function getAllLocalApps(){
 
 function deleteApp(nam){
     //console.log("Intento de borrar ", nam);
-    let todel = dbI.transaction("appLocal", "readwrite")
+    let todel = db.transaction("appLocal", "readwrite")
     .objectStore("appLocal")
     .delete(nam)
     .onsuccess = function (event) {
-        console.log("App eliminado", nam);
+        //console.log("App eliminado", nam);
     }
     changeScreen("menu");
 }

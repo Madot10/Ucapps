@@ -18,10 +18,10 @@ function getAllApps(){
                 // doc.data() is never undefined for query doc snapshots
                 genHTMLlist(doc.data().name, doc.data().icon, doc.data().url, doc.data().description,apps.length);
                 apps[apps.length] = doc.data();
-                console.log(doc.id, " => ", doc.data());
+                //console.log(doc.id, " => ", doc.data());
             });
             toggleLoader();
     }).catch(function(error){
-        console.log("ERROR", error);
+        //console.log("ERROR", error);
     });
 }
